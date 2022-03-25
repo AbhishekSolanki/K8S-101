@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-hostpath
+spec:
+  containers:
+  - image: mysql
+    name: test-container
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: mysql-hostpath-volume
+    env:
+     - name: MYSQL_ROOT_PASSWORD
+       value: cisco
+     - name: MYSQL_DATABASE
+       value: cisco
+  volumes:
+  - name:  mysql-hostpath-volume
+    hostPath:
+     path: /mysqldata
+     type: DirectoryOrCreate

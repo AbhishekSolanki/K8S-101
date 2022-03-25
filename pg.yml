@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pg
+  name: pg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pg
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pg
+    spec:
+      containers:
+      - image: docker.io/postgres
+        name: postgres
+        env:
+        - name: POSTGRES_PASSWORD
+          value: cisco
+        - name: POSTGRES_DB
+          value: cisco
+        resources: {}
+status: {}
