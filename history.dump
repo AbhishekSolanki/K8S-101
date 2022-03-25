@@ -1,0 +1,557 @@
+    1   sudo yum install git -y
+    2  git clone https://github.com/ashutoshbhakare/k8sinstall
+    3  ls
+    4  cd k8sinstall
+    5  ls
+    6  sh basescript.sh 
+    7  cd
+    8  sudo cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf 
+    9  net.bridge.bridge-nf-call-ip6tables = 1 
+   10  net.bridge.bridge-nf-call-iptables = 1 
+   11  EOF
+   12  sudo sysctl --system
+   13  sudo mkdir /etc/docker
+   14  cat <<EOF | sudo tee /etc/docker/daemon.json
+   15  {
+   16    "exec-opts": ["native.cgroupdriver=systemd"],
+   17    "log-driver": "json-file",
+   18    "log-opts": {
+   19      "max-size": "100m"
+   20    },
+   21    "storage-driver": "overlay2"
+   22  }
+   23  EOF
+   24  sudo setenforce 0
+   25  sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+   26  sudo sestatus 
+   27  sudo setenforce 0
+   28  sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+   29  sudo sestatus 
+   30  sudo systemctl stop firewalld
+   31  sudo systemctl restart ku
+   32  sudo systemctl enab
+   33  sudo swapoff -a
+   34  sudo kubeadm init
+   35  sudo kubeadm reset
+   36  sudo kubeadm init
+   37  sudo systemctl deamon -reload
+   38  sudo systemctl deamon-reload
+   39  cd /etc/yum.repos.d
+   40  ls
+   41  rpm -q docker-ce
+   42  cleaer
+   43  clear
+   44  systemctl restart docker
+   45  sudo systemctl restart docker
+   46  sudo systemctl enable docker
+   47  cd
+   48  hist
+   49  history 
+   50  sudo kubeadm reset
+   51  sudo kubeadm init
+   52  mkdir -p $HOME/.kube
+   53    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   54    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   55  kubeadm token create --print-join-command
+   56  kubectl get nodes
+   57  logout
+   58  kubectl get nodes
+   59  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   60  kubectl get nodes
+   61  kubectl create deployment mydep1 --image=docker.io/httpd
+   62  kubectl get deployments
+   63  kubectl get pods
+   64  kubectl delete pod mydep1-d59bb44f-f7f9g 
+   65  kubectl delete pod mydep1-d59bb44f-sjvkt 
+   66   kubectl get pods 
+   67  kubectl scale deployment mydep1 --replicas=2
+   68  kubectl get pods 
+   69  kubectl get pods -0 wide
+   70  kubectl get pods -o wide
+   71  curl  10.44.0.3 
+   72  curl  10.44.0.4 
+   73  ls
+   74  kubectl get pods
+   75  kubectl create deploymnet ho1 --image openshift/hello-openshift
+   76  kubectl create deployment ho1 --image openshift/hello-openshift
+   77  kubectl get pods
+   78  kubectl get pods -o wide
+   79  curl 10.44.0.5 
+   80  curl 10.44.0.5:8080
+   81  curl  10.44.0.3 
+   82  kubectl get nodes
+   83  ifconfig
+   84  mydep1-d59bb44f-c5wsn
+   85  kubectl get pods
+   86  curl mydep1-d59bb44f-c5wsn
+   87  curl mydept1
+   88  curl mydep1
+   89  kubectl expose deployment mydep1 --port=80
+   90  kubectl get svc 
+   91  kubectl get svc  -o wide
+   92  curl mydep1
+   93  curl 10.104.72.91
+   94  kubectl describe svc mydep1
+   95  kubectl expose deployment ho1 --port=8080
+   96  kubectl describe svc ho1
+   97  curl 10.98.68.126
+   98  curl 10.98.68.126:8080
+   99  kubernetes get svc
+  100  kubectl get svc
+  101  kubectl --help
+  102  kubectl c reate --help
+  103  kubectl create --help
+  104  kubectl create deployment mydb --image=docker.io/mysql:5.7 --dry-run -o ya
+  105  ml > mydb.yml
+  106  kubectl create deployment mydb --image=docker.io/mysql:5.7 --dry-run -o yaml > mydb.yml
+  107  ls
+  108  vi mydb.yml 
+  109   kubectl get pods 
+  110  kubectl create -f mydb.yml 
+  111   kubectl get pods 
+  112  kubectl logs mydb-7b55d9bb46-7dg57 
+  113  kubectl logs mydb
+  114  kubectl logs mydb-7b55d9bb46-jjssl
+  115  kubectl exec -it mydb-7b55d9bb46-jjssl 
+  116  kubectl exec -it mydb-7b55d9bb46-jjssl bash
+  117  kubectl get pods 
+  118  kubectl expose deployment mydb --port 3306
+  119  kubectl get svc 
+  120  kubectl create deployment wp --image docker.io/wordpress --dry-run -o yaml > wp.yml
+  121  ls
+  122  vi wp.yml 
+  123  ls
+  124  clear
+  125  kubectl get svc
+  126  curl mudep1
+  127  curl mydep1
+  128  ls
+  129  vi wp.yml 
+  130  kubectl create -f wp.yml 
+  131  kubectl get pods 
+  132  kubectl get pods -w
+  133  kubectl get deployment
+  134  kubectl get pofs
+  135  kubectl get svc
+  136  kubectl edit deployment mydb
+  137  kubectl get pods -q
+  138  kubectl get pods -w
+  139  kubectl edit deployment wp
+  140  kubectl get pods -w
+  141  kubectl get pods
+  142  kubectl get pods -w 
+  143  kubectl get pods -o wide
+  144  curl 10.44.0.6 
+  145  curl 10.44.0.6:80
+  146  wget 10.44.0.6 
+  147  ls
+  148  cat index.html 
+  149  ls
+  150  rm index.html 
+  151  kubectl get pods
+  152  kubectl get deployment
+  153  kubectl edit deployment mydep1
+  154  kubectl edit svc mydep1
+  155  wgetip.com
+  156  curl wgetip.com
+  157  kubectl get pods -o wide
+  158  kubectl get svc
+  159  kubectl edit servcie ho1
+  160  kubectl edit svc ho1
+  161  kubectl get svc
+  162   kubectl expose deployment wp --port:80
+  163   kubectl expose deployment wp --port80
+  164   kubectl expose deployment wp --port=80
+  165  kubectl get svc
+  166  kubectl edit svc wp
+  167  kubectl get svc
+  168  CLEAR
+  169  clear
+  170  ls
+  171  kubectl create deployment mydb --image=docker.io/postgres --dry-run -o yaml > pg.yml
+  172  ls
+  173  vi pg.yml 
+  174  POSTGRES_DBkubectl create -f pg.yml 
+  175  kubectl create -f pg.yml 
+  176  ls
+  177  vi mydb.yml 
+  178  vi pg.yml 
+  179  kubectl create -f pg.yml 
+  180  vi pg.yml 
+  181  kubectl create -f pg.yml 
+  182  kubectl get pods
+  183  kubectl create deployment pg --image=gogs/gogs --dry-run -o yaml > gogs.yml
+  184  ls
+  185  vi gogs.yml 
+  186  ls
+  187  kubectl get pods
+  188  kubectl 
+  189  kubectl inspect pg
+  190  kubectl get pods -o wide
+  191  kubectl expose deployment pg --port=5132
+  192  kubectl expose deployment gogs --port=3000
+  193  kubectl create -f gogs.yml 
+  194  rm gogs.yml 
+  195  kubectl create deployment gogs --image=gogs/gogs --dry-run -o yaml > gogs.yml
+  196  kubectl create -f gogs.yml
+  197  kubectl expose deployment gogs --port=3000
+  198  kubectl get pods -o wide
+  199  curl 10.44.0.9
+  200  curl 10.44.0.9:3000
+  201  kubectl edit svc gogs
+  202  kubectl get svc 
+  203  curl getip.com
+  204  curl wgetip.com
+  205  kubectl edit svc 
+  206  ls
+  207  kubectl edit svc pg
+  208  kubectl get svc 
+  209  kubectl edit svc pg
+  210  kubectl get svc 
+  211  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+  212  vkubectl proxy
+  213  kubectl proxy
+  214  kubectl proxy --address='0.0.0.0' --port=8002 --accept-hosts='.*'
+  215   kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+  216  kubectl get pods -n kube-system
+  217  kubectl logs metrics-server-76f8d9fc69-mqzlf -n kube-system
+  218  wget -c https://gist.githubusercontent.com/initcron/1a2bd25353e1faa22a0ad41ad1c01b62/raw/008e23f9fbf4d7e2cf79df1dd008de2f1db62a10/k8s-metrics-server.patch.yaml
+  219  kubectl patch deploy metrics-server -p "$(cat k8s-metrics-server.patch.yaml)" -n kube-system
+  220  kubectl get pods -n kube-system
+  221  kubectl top pods 
+  222  kubectl get pods -n kube-system
+  223  kubectl top pods 
+  224  kubectl top nodes 
+  225  free -m
+  226  free -g
+  227  at hpaexample.yml 
+  228  cat hpaexample.yml
+  229  vi hpaexample.yml 
+  230  ls
+  231  rm hpaexample.yml 
+  232  vi hpaexample.yml
+  233  ls
+  234  cat hpaexample.yml <<apiVersion: v1
+  235  kind: Service
+  236  metadata:
+  237    creationTimestamp: null
+  238    name: php-apache
+  239  spec:
+  240    ports:
+  241    - port: 80
+  242      protocol: TCP
+  243      targetPort: 80
+  244    selector:
+  245      run: php-apache
+  246  status:
+  247    loadBalancer: {}
+  248  ---
+  249  ---
+  250  apiVersion: apps/v1
+  251  kind: Deployment
+  252  metadata:
+  253    creationTimestamp: null
+  254    labels:
+  255      run: php-apache
+  256    name: php-apache
+  257  spec:
+  258    replicas: 1
+  259    selector:
+  260      matchLabels:
+  261        run: php-apache
+  262    strategy: {}
+  263    template:
+  264      metadata:
+  265        creationTimestamp: null
+  266        labels:
+  267          run: php-apache
+  268      spec:
+  269        containers:
+  270        - image: k8s.gcr.io/hpa-example
+  271          name: php-apache
+  272          ports:
+  273          - containerPort: 80
+  274          resources:
+  275            requests:
+  276              cpu: 200m
+  277  status: {}
+  278  EOF
+  279  ls
+  280  nano hpa.example
+  281  nano hpaexample.yml
+  282        - image: k8s.gcr.io/hpa-example
+  283          name: php-apache
+  284          ports:
+  285          - containerPort: 80
+  286          resources:
+  287            requests:
+  288              cpu: 200m
+  289  status: {}
+  290  vi hpaexample.yml
+  291  vi hpa.yml
+  292  kubectl create -f hpaexample.yml 
+  293  kubectl get pods  -w
+  294  kubectl create -f hpa.yml 
+  295  vi hpa.yml 
+  296  kubectl create -f hpa.yml 
+  297  kubectl get hpa
+  298  kubectl run -i --tty load-generator --image=busybox /bin/sh
+  299  kubectl get pods
+  300  curl php-apache.default.svc.cluster.local
+  301  kubectl get svc 
+  302  kubectl create -f hpaexample.yml 
+  303  vi hpaexample.yml
+  304  kubectl create -f hpaexample.yml 
+  305  kubectl get svc 
+  306  kubectl delete deployment "php-apache
+  307  kubectl delete deployment php-apache
+  308  kubectl create -f hpaexample.yml 
+  309  kubectl get svc 
+  310  kubectl create -f hpaexample.yml 
+  311  kubectl get pods
+  312  kubectl get svc 
+  313  kubectl expose deployment php-apache --port=80
+  314  kubectl get svc 
+  315  curl php-apache.default.svc.cluster.local
+  316  curl http://php-apache.default.svc.cluster.local
+  317  curl 10.102.105.197 
+  318  kubectl run -i --tty load-generator --image=busybox /bin/sh
+  319  kubectl exec -it load-generator
+  320  kubectl exec -it load-generator /bin/sh
+  321  kubectl get pods
+  322  kubectl get hpa
+  323  curl php-apache.default.svc.cluster.local
+  324  ls
+  325  vi hpaexample.yml 
+  326  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+  327  kubectl get pods -n ingress-nginx
+  328  kubectl get svc -n ingress-nginx
+  329  curl wgetip.com
+  330  kubectl get pods -n ingress-nginx
+  331  20.124.125.212
+  332  kubectl get pods -n ingress-nginx
+  333  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+  334  kubectl get pods -n ingress-nginx
+  335  kubectl get svc -n ingress-nginx
+  336  curl wgetip.com
+  337  curl 10.103.157.254:30320
+  338  kubectl get pods -n ingress-nginx
+  339  kubectl get ing -n ingress-nginx
+  340  kubectl logs -n ingress-nginx-controller-568764d844-bqjg5 
+  341  kubectl logs ingress-nginx-controller-568764d844-bqjg5 
+  342  kubectl get pods -n ingress-nginx
+  343  kubectl logs ingress-nginx-controller-568764d844-bqjg5
+  344  kubectl logs -n ingress-nginx ingress-nginx-controller-568764d844-bqjg5
+  345  wget 10.103.157.254:30320
+  346  wget https://10.103.157.254:30320
+  347   kubectl get svc -n ingress-nginx
+  348  curl 10.103.157.254 
+  349  curl 10.103.157.254:443
+  350  curl 10.103.157.254:30320
+  351  curl wgetip.com
+  352   kubectl edit svc -n ingress-nginx
+  353   kubectl get svc -n ingress-nginx
+  354   kubectl edit svc ingress-nginx-controller
+  355   kubectl edit svc -n ingress-nginx
+  356   kubectl get svc -n ingress-nginx
+  357  ls
+  358  vi rule.yml
+  359  kubectl create deployment mydep1 --image=docker.io/httpd
+  360  kubectl create deployment mydep2 --image=docker.io/openshift/hello-openshi
+  361  ft
+  362  kubectl expose deployment mydep1 --port=80
+  363  kubectl expose deployment mydep2 --port=8080
+  364  kubectl create -f rule.yml
+  365  vi rule.yml 
+  366  kubectl create -f rule.yml
+  367  kubectl get svc
+  368  kubectl create deployment mydep10 --image=docker.io/httpd
+  369  kubectl create deployment mydep2 --image=docker.io/openshift/hello-openshi
+  370  ft
+  371  kubectl create deployment mydep11 --image=docker.io/openshift/hello-openshit
+  372  kubectl expose deployment mydep10 --port=80
+  373  kubectl expose deployment mydep11 --port=8080
+  374  kubectl get svc
+  375  vi rule.yml 
+  376  kubectl create -f rule.yml
+  377  kubectl apply -f rule.yml
+  378  ls
+  379  kubectl get svc 
+  380  curl v
+  381  curl 10.103.89.240 
+  382  curl 10.99.18.28
+  383  curl 10.99.18.28:8080
+  384  curl 10.99.18.28:8888
+  385  vi rule.yml
+  386  ls
+  387  kubectl get svc
+  388  curl 10.103.89.240
+  389  vi rule.yml
+  390  kubectl apply -f rule.yml
+  391  vi rule.yml
+  392  kubectl apply -f rule.yml
+  393  vi rule.yml
+  394  kubectl apply -f rule.yml
+  395  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+  396  kubectl get pods -n kubernetes-dashboard
+  397   kubectl get svc -n kubernetes-dashboard
+  398  kubectl edit svc kubernetes-dashboard  -n kubernetes-dashboard
+  399  kubectl get svc -n kubernetes-dashboard
+  400  curl wgetip.com
+  401  kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep kubernetes-dashboard | awk '{print $1}')
+  402  eyJhbGciOiJSUzI1NiIsImtpZCI6IkVCemVNUWZTbjYzM0Q2UlVSU2l0VndIR2lkYUtySlYxbUFaQ2dOZ1gwbmcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2a
+  403  WNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi04ZjdjcyIsImt1YmVybmV0Z
+  413  clear
+  414  kubectl get clusterrolebinding kubernetes-dashboard  -o yaml
+  415  kubectl delete clusterrolebinding kubernetes-dashboard
+  416  kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=view 
+  417  --serviceaccount=kubernetes-dashboard:kubernetes-dashboard
+  418  kubectl delete clusterrolebinding kubernetes-dashboard
+  419  kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=view --serviceaccount=kubernetes-dashboard:kubernetes-dashboard
+  420  kubectl get clusterrole
+  421  kubectl get clusterrole view
+  422   kubectl get clusterrole view -o yaml
+  423  kubectl delete clusterrolebinding kubernetes-dashboard
+  424  kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:kubernetes-dashboard
+  425  vi ghost.yml
+  426  kubectl create -f ghost.yml 
+  427  kubectl get pods 
+  428  vkubectl set image deployment/mydep mydep=ghost:0.11 --record
+  429  kubectl set image deployment/mydep mydep=ghost:0.11 --record
+  430   kubectl rollout history deployment/mydep
+  431  kubectl set image deployment/mydep mydep=ghost:0.10 --record
+  432  kubectl rollout history deployment/mydep
+  433  vkubectl rollout undo  deployment/mydep
+  434  kubectl rollout undo  deployment/mydep
+  435  vkubectl rollout undo  deployment/mydep
+  436  kubectl rollout history deployment/mydep
+  437  kubectl rollout undo  deployment/mydep --to-revision=1
+  438   kubectl rollout history deployment/mydep
+  439  vi ds.yml
+  440   kubectl create -f ds.yml 
+  441  kubectl get pods -w
+  442  ubectl get pods -o wide
+  443  kkubectl get pods -o wide
+  444  kubectl get pods -o wide
+  445  kubectl edit node master1
+  446  kubectl get pods -o wide
+  447  kubectl edit node master1
+  448  kubectl get pods -o wide
+  449  kubectl label node master9 hdd=ssd
+  450  kubectl label node master1 hdd=ssd
+  451  kubectl label node node1 hdd=normal
+  452   kubectl get nodes --show-labels
+  453  vi nodeselector.yml 
+  454  kubectl create -f nodeselector.yml 
+  455  kubectl get pods -o wide
+  456  ls
+  457  clear
+  458  ls
+  459  wegetip.com
+  460  curl wgetip.com
+  461  vi etc/ssh/sshd_config
+  462  ls
+  463  /etc/ssh/sshd_configh
+  464  history
+  465  kubectl create -f init.yml 
+  466  vi  init.yml 
+  467  kubectl create -f init.yml 
+  468  kubectl get pods
+  469  kubectl logs -c init-myservice myapp-pod
+  470  vi svc.yml 
+  471  kubectl create -f svc.yml 
+  472  kubectl logs -c init-myservice myapp-pod -f
+  473  kubectl get pods 
+  474  kubectl create -f svc.yml
+  475  kubectl get pods 
+  476  vi probes.yml 
+  477  kubectl create -f probes.yml
+  478  kubectl get pods 
+  479  kubectl describe pod liveness-exec 
+  480  kubectl get pods 
+  481  vi hostpath.yml 
+  482  kubectl create -f hostpath.yml 
+  483  cd /data/
+  484  sudo touch sample.txt
+  485  kubectl get pods 
+  486  kubectl exec -it test-pd /bin/bash
+  487  clear
+  488  ls
+  489  vi mysqlhostpath.yml
+  490  cd \
+  491  ls
+  492  vi mysqlhostpath.yml
+  493  create -f mysqlhostpath.yml 
+  494  kubectl create -f mysqlhostpath.yml 
+  495  cd /mysqldata/
+  496  ls
+  497  kubectl get pod
+  498  cd /mysqldata/
+  499  ls
+  500  cd \
+  501  ls
+  502  cat mysqlhostpath.yml 
+  503  vi nfs.sh 
+  504  clear
+  505  sudo yum install -y nfs-utils
+  506  ls
+  507  vi nfs.sh 
+  508  sh -x nfs.sh 
+  509  vi pv.yml 
+  510  ifconfig
+  511  vi pv.yml 
+  512  pvc.yml
+  513  vi pvc.yml
+  514  vi pv-mysql.yml 
+  515  kubectl create -f pv-mysql.yml 
+  516  kubectl get pods -w
+  517  ls
+  518  create -f pv.yml 
+  519  kubectl create -f pv.yml 
+  520  kubectl create -f pvc.yml 
+  521  vi pvc.yml 
+  522  kubectl create -f pvc.yml 
+  523  vi pvc.yml 
+  524  kubectl create -f pvc.yml 
+  525  vi pvc.yml 
+  526  kubectl create -f pvc.yml 
+  527  vi pvc.yml 
+  528  kubectl create -f pvc.yml 
+  529  vi pvc.yml 
+  530  kubectl create -f pvc.yml 
+  558  ls
+  559  pwd
+  560  passwd
+  561  kubectl create namespace cisco
+  562  kubectl get ns
+  563  kubectl get pods -n cisco
+  564  kubectl create deployment test --image=docker.io/httpd -n cisco
+  565  kubectl get pods -n cisco
+  570  vi policy.yml
+  571  kubectl create -f policy.yml 
+  572  kubectl run --rm -it --image=alpine test -- sh
+  573  kubectl get pods --show-labels
+  574  vi np.yml
+  575  kubectl create -f np.yml
+  576  kubectl run --rm -it --image=alpine test -- sh
+  577  kubectl delete -f np.yml 
+  578  kubectl run --rm -it --image=alpine test -- sh
+  579  kubectl get policy
+  580  kubectl get networkpolicies
+  686  kubectl create -f rs.yml -n cisco
+  687  kubectl create deployment test --image=docker.io/httpd -n cisco
+  688  kubectl create deployment test4 --image=docker.io/httpd -n cisco
+  689  kubectl get pods -n cisco
+  690  kubectl scale deployment test4 --replicas=5 -n cisco
+  691  kubectl get pods -n cisco
+  692  kubectl get events -n cisco
+  693   sudo yum install etcd
+  694  sudo ETCDCTL_API=3 etcdctl --endpoints $advertise_url --cacert /etc/kubernetes/pki/etcd/ca.crt --key /etc/kubernetes/pki/etcd/server.key --cert /etc/kubernetes/pki/etcd/server.crt snapshot save test1.db
+  695  kubectl describe pod etcd-master -n kube-system
+  696  export advertise_url=10.1.0.10:2379
+  697  export advertise_url=10.0.0.4:2379
+  698  echo $advertise_url
+ sudo yum install etcd -y  
+  704  sudo ETCDCTL_API=3 etcdctl --endpoints $advertise_url --cacert /etc/kubernetes/pki/etcd/ca.crt --key /etc/kubernetes/pki/etcd/server.key --cert /etc/kubernetes/pki/etcd/server.crt snapshot status test1.db --write-out=table
+  705  ls -Z
+  706  ls
